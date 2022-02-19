@@ -117,5 +117,5 @@ if __name__ == '__main__':
     dir_path = os.getcwd()
     out_path = os.path.join(dir_path, 'output.csv')
     df.to_csv(out_path)
-    #fig = px.bar(df, x='Word', y='Count')
-    #fig.show()
+    fig = px.bar(df, x='Word', y='Count')
+    fig.show()
