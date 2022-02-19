@@ -107,7 +107,7 @@ def create_tweets_df(word_counts_dict, minimum_count):
 
 
 if __name__ == '__main__':
-    user_name = 'juanpablo__u'
+    user_name = ''
     api = auth()
     tweets_list = search_tweets(api)
     tweets_list = clean_tweets(tweets_list)

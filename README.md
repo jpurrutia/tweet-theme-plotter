@@ -14,7 +14,12 @@ I'm a newbie to docker so any contribution is welcome!
 
 ## How to use
 
-### Get Twitter API Credentials
+### Get Twitter API Credentials and Username
+
+## Change your username in the tweet_scraper file
+
+`line 110`
+
 Get credentials for:
 ```
 CONSUMER_KEY=''
