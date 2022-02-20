@@ -1,6 +1,5 @@
-.env
 env
 config.py
 __pycache__
-*.csv
+output.csv
 notes.txt
