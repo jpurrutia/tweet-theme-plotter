@@ -3,9 +3,14 @@ from datetime import datetime
 import pandas as pd
 import os
 import re
-import plotly.express as px
 from my_stop_words import stop_words
 import config
+from dash.dependencies import Output, Input, State
+import dash_bootstrap_components as dbc
+from dash import html, dcc
+import plotly.express as px
+from flask import Flask
+import dash
 
 CONSUMER_KEY = config.CONSUMER_KEY
 CONSUMER_SECRET = config.CONSUMER_SECRET
@@ -101,9 +106,35 @@ def get_largest_word(word_counts):
 
 def create_tweets_df(word_counts_dict, minimum_count):
     df = pd.DataFrame(word_counts_dict.items(), columns=['Word', 'Count'])
-    df = df[df['Count'] > minimum_count].sort_values(by='Count', ascending=False)
+    #df = df[df['Count'] > minimum_count].sort_values(by='Count', ascending=False)
     
     return df
+
+server = Flask(__name__)
+app = dash.Dash(server=server, external_stylesheets=[dbc.themes.FLATLY])
+app.title = 'Dashboard'
+
+
+app.layout = dbc.Container([
+    dbc.Row(dbc.Col(html.H2("What are you Tweeting?"), width={'size': 12, 'offset': 0, 'order': 0}), style = {'textAlign': 'center', 'paddingBottom': '1%'}),
+    dbc.Row(dbc.Col(html.H5("Input the threshold for number of times you have tweeted about something."))),
+    dcc.Input(
+            id="value_input",
+            type='number',
+            value=1,
+        ),
+    dcc.Graph(id='bar-chart')
+    ])
+ 
+@app.callback(
+Output("bar-chart", "figure"),
+[Input("value_input", "value")])
+def update_figure(minimum_count):
+    df = pd.read_csv('output.csv')
+    df = df[df['Count'] > minimum_count].sort_values(by='Count', ascending=False)
+    fig = px.bar(df, x='Word', y='Count')
+ 
+    return fig
 
 
 if __name__ == '__main__':
@@ -117,5 +148,4 @@ if __name__ == '__main__':
     dir_path = os.getcwd()
     out_path = os.path.join(dir_path, 'output.csv')
     df.to_csv(out_path)
-    fig = px.bar(df, x='Word', y='Count')
-    fig.show()
+    app.run_server(debug=True)
