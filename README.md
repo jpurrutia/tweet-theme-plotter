@@ -16,7 +16,7 @@ I'm a newbie to docker so any contribution is welcome!
 
 ### Get Twitter API Credentials and Username
 
-## Change your username in the tweet_scraper file
+## Change your username in the app.py file
 
 `line 110`
 
@@ -36,32 +36,17 @@ Make sure you DO NOT share those credentials with anyone.
 
 ### Build the Container
 ```
-docker build -t tweet_app:v001 .
+docker-compose build
 ```
 
 ### Run the Container
 ```
-docker run -v $(pwd):/mydata -t tweet_app:v001
+docker-compose up
 ```
 
 You should see a populated output.csv locally. This is possible due to a Bind mounted volume at runtime. It maps a path in your host file system to a path in the Docker container's filesystem.
 
-You'll notice the last two lines are a plotly graph to display the data, but I don't have that figured out yet.
-The next step is figuring out how to do that!
+If everything is running correctly, go to your browser and type in:
+`http://localhost:5000/`
 
-
-# To get Plot Locally 
-### (Defeats the purpose of the containter but eventually I'll get the plot containerized)
-If you want to get the ploty locally and you want to use Python on you local machine...
-
-## Create a virtual environment
-```python3 -m venv```
-
-## Activate the virtual environment
-``` source env/bin/activate```
-
-## pip install the dependencies
-``` pip3 install -r requirements.txt ```
-
-## Run the Script
-``` python tweet_scraper.py ```
+You should see your most tweeted topics!
