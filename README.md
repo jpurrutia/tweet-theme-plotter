@@ -16,11 +16,14 @@ I'm a newbie to docker so any contribution is welcome!
 
 ### Get Twitter API Credentials and Username
 
+[Here](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api)
+
 ## Change your username in the app.py file
 
 `line 110`
 
-Get credentials for:
+Get credentials from:
+
 ```
 CONSUMER_KEY=''
 CONSUMER_SECRET=''
