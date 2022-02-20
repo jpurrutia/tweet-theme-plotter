@@ -31,7 +31,7 @@ ACCESS_TOKEN=''
 ACCESS_SECRET=''
 ```
 Create a `config.py ` file and add those credentials to that file.
-It will look just like the code block above and you are already importing into the  `tweet_scraper.py` file.
+It will look just like the code block above and you are already importing into the  `app.py` file.
 
 Make sure you DO NOT share those credentials with anyone.
 
